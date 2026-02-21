@@ -30,18 +30,18 @@ export default function ResumePage() {
     }
 
     return (
-        <div style={{ maxWidth: '1200px' }}>
-            <div style={{ marginBottom: '32px' }}>
-                <h1 style={{ fontSize: '28px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '4px' }}>Resume Studio</h1>
-                <p style={{ color: 'var(--muted)', fontSize: '15px' }}>Optimize, version and compare your resume</p>
+        <div className="max-w-7xl mx-auto space-y-8">
+            <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-1">Resume Studio</h1>
+                <p className="text-[var(--muted)] text-sm sm:text-base">Optimize, version and compare your resume</p>
             </div>
 
             {/* Score breakdown */}
-            <div className="glass-card" style={{ padding: '24px', marginBottom: '24px' }}>
-                <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div className="glass-card p-6 md:p-8">
+                <div className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.2em] mb-8">
                     Score Breakdown
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {Object.entries(mockMetrics).map(([key, value]) => {
                         const labels: Record<string, string> = {
                             skillDensity: 'Skill Density',
@@ -56,17 +56,18 @@ export default function ResumePage() {
                             leadership: 'var(--warning)',
                         }
                         return (
-                            <div key={key}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                                    <span style={{ fontSize: '13px', color: 'var(--muted)' }}>{labels[key]}</span>
-                                    <span style={{ fontSize: '13px', fontWeight: 700, color: colors[key] }}>{value}</span>
+                            <div key={key} className="space-y-3">
+                                <div className="flex justify-between items-end">
+                                    <span className="text-sm font-bold opacity-70">{labels[key]}</span>
+                                    <span className="text-lg font-black" style={{ color: colors[key] }}>{value}</span>
                                 </div>
-                                <div style={{ height: '6px', background: 'var(--card-border)', borderRadius: '3px', overflow: 'hidden' }}>
+                                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${value}%` }}
-                                        transition={{ duration: 1 }}
-                                        style={{ height: '100%', background: colors[key], borderRadius: '3px' }}
+                                        transition={{ duration: 1, ease: 'easeOut' }}
+                                        className="h-full rounded-full"
+                                        style={{ background: colors[key], boxShadow: `0 0 10px ${colors[key]}44` }}
                                     />
                                 </div>
                             </div>
@@ -75,114 +76,106 @@ export default function ResumePage() {
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '24px' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {/* Version list */}
-                <div>
-                    <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <div className="lg:col-span-4 space-y-6">
+                    <div className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.2em]">
                         Versions
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div className="space-y-3">
                         {mockVersions.map((v) => (
                             <motion.div
                                 key={v.id}
                                 whileHover={{ x: 3 }}
                                 onClick={() => setSelected(v.id)}
-                                className="glass-card"
-                                style={{
-                                    padding: '16px', cursor: 'pointer',
-                                    border: selected === v.id ? '1px solid rgba(0,255,136,0.4)' : '1px solid var(--card-border)',
-                                }}
+                                className={`glass-card p-5 cursor-pointer transition-all ${selected === v.id ? 'border-[var(--accent-green)]/40 bg-[var(--accent-green)]/5' : 'hover:bg-white/[0.02]'
+                                    }`}
                             >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <div style={{ fontWeight: 700, fontSize: '15px' }}>{v.version}</div>
-                                    <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                        {v.active && <Star size={12} color="var(--accent-green)" fill="var(--accent-green)" />}
-                                        <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--accent-green)' }}>{v.score}</span>
+                                <div className="flex justify-between items-center">
+                                    <div className="font-bold text-base">{v.version}</div>
+                                    <div className="flex gap-3 items-center">
+                                        {v.active && <Star size={14} className="text-[var(--accent-green)] fill-[var(--accent-green)]" />}
+                                        <span className="text-xl font-black text-[var(--accent-green)]">{v.score}</span>
                                     </div>
                                 </div>
-                                <div style={{ color: 'var(--muted)', fontSize: '12px', marginTop: '4px' }}>{v.date}</div>
+                                <div className="text-[var(--muted)] text-xs mt-1">{v.date}</div>
                             </motion.div>
                         ))}
 
-                        <button
-                            className="btn-secondary"
-                            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', fontSize: '14px', padding: '10px' }}
-                        >
-                            <Plus size={14} /> New Version
+                        <button className="btn-secondary w-full justify-center !py-4">
+                            <Plus size={16} className="mr-2" /> New Version
                         </button>
                     </div>
                 </div>
 
                 {/* Preview + actions */}
-                <div>
-                    <div className="glass-card" style={{ padding: '32px', minHeight: '400px', marginBottom: '16px', position: 'relative' }}>
-                        <div style={{ position: 'absolute', top: '16px', right: '16px', display: 'flex', gap: '8px' }}>
-                            <span style={{ background: 'rgba(0,255,136,0.1)', color: 'var(--accent-green)', fontSize: '12px', fontWeight: 600, padding: '4px 10px', borderRadius: '999px' }}>
+                <div className="lg:col-span-8 space-y-6">
+                    <div className="glass-card p-6 sm:p-10 min-h-[500px] relative flex flex-col">
+                        <div className="absolute top-6 right-6">
+                            <span className="bg-[var(--accent-green)]/10 text-[var(--accent-green)] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-[var(--accent-green)]/20">
                                 Active Version
                             </span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                            <FileText size={24} color="var(--accent-green)" />
+                        <div className="flex items-center gap-4 mb-10">
+                            <div className="w-12 h-12 rounded-2xl bg-[var(--accent-green)]/10 flex items-center justify-center">
+                                <FileText size={24} className="text-[var(--accent-green)]" />
+                            </div>
                             <div>
-                                <div style={{ fontWeight: 700, fontSize: '16px' }}>Resume v2.1</div>
-                                <div style={{ color: 'var(--muted)', fontSize: '13px' }}>Last modified Jan 10, 2025</div>
+                                <div className="font-black text-xl">Resume v2.1</div>
+                                <div className="text-[var(--muted)] text-sm font-medium">Last modified Jan 10, 2025</div>
                             </div>
                         </div>
 
                         {/* Simulated document */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <div style={{ height: '20px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', width: '60%' }} />
-                            <div style={{ height: '12px', background: 'rgba(255,255,255,0.04)', borderRadius: '4px', width: '40%' }} />
-                            <div style={{ height: '1px', background: 'var(--card-border)', margin: '8px 0' }} />
+                        <div className="space-y-4 opacity-40">
+                            <div className="h-6 bg-white/10 rounded-md w-[60%]" />
+                            <div className="h-4 bg-white/5 rounded-md w-[40%]" />
+                            <div className="h-px bg-white/10 my-4" />
                             {[100, 90, 85, 95, 70, 80, 75].map((w, i) => (
-                                <div key={i} style={{ height: '10px', background: 'rgba(255,255,255,0.04)', borderRadius: '3px', width: `${w}%` }} />
+                                <div key={i} className="h-3 bg-white/5 rounded-sm" style={{ width: `${w}%` }} />
                             ))}
-                            <div style={{ height: '1px', background: 'var(--card-border)', margin: '8px 0' }} />
-                            {[85, 95, 70, 80].map((w, i) => (
-                                <div key={i} style={{ height: '10px', background: 'rgba(255,255,255,0.04)', borderRadius: '3px', width: `${w}%` }} />
+                            <div className="h-px bg-white/10 my-4" />
+                            {[85, 95, 70, 80, 60].map((w, i) => (
+                                <div key={i} className="h-3 bg-white/5 rounded-sm" style={{ width: `${w}%` }} />
                             ))}
                         </div>
 
                         {optimized && (
                             <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                style={{
-                                    position: 'absolute', bottom: '16px', left: '16px', right: '16px',
-                                    background: 'rgba(0,255,136,0.1)', border: '1px solid rgba(0,255,136,0.2)',
-                                    borderRadius: '10px', padding: '12px', fontSize: '14px', color: 'var(--accent-green)',
-                                }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="mt-auto bg-[var(--accent-green)]/10 border border-[var(--accent-green)]/30 rounded-2xl p-6 text-sm text-[var(--accent-green)] flex gap-4 items-center"
                             >
-                                ✅ AI optimization complete! Score improved from 72 → 84. Review suggested changes.
+                                <Zap size={20} className="shrink-0" />
+                                <p className="font-bold leading-relaxed">
+                                    AI optimization complete! Score improved from 72 → 84. Review suggested changes.
+                                </p>
                             </motion.div>
                         )}
                     </div>
 
                     {/* Toolbar */}
-                    <div style={{ display: 'flex', gap: '12px' }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                         <button
                             onClick={handleOptimize}
                             disabled={optimizing}
-                            className="btn-primary"
-                            style={{ flex: 1, justifyContent: 'center', opacity: optimizing ? 0.7 : 1 }}
+                            className={`btn-primary !py-4 flex justify-center items-center ${optimizing ? 'opacity-70 cursor-wait' : ''}`}
                         >
                             {optimizing ? (
-                                <><span style={{ animation: 'spin 1s linear infinite', display: 'inline-block' }}>⚡</span> Optimizing...</>
+                                <><div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-3" /> Optimizing...</>
                             ) : (
-                                <><Zap size={16} /> Optimize with AI</>
+                                <><Zap size={18} className="mr-2" /> Optimize with AI</>
                             )}
                         </button>
-                        <button className="btn-secondary" style={{ flex: 1, justifyContent: 'center' }}>
-                            <Plus size={16} /> Generate New Version
+                        <button className="btn-secondary !py-4 flex justify-center items-center">
+                            <Plus size={18} className="mr-2" /> New Version
                         </button>
-                        <button className="btn-secondary" style={{ flex: 1, justifyContent: 'center' }}>
-                            <GitCompare size={16} /> Compare Versions
+                        <button className="btn-secondary !py-4 flex justify-center items-center sm:col-span-2 xl:col-span-1">
+                            <GitCompare size={18} className="mr-2" /> Compare Versions
                         </button>
                     </div>
                 </div>
             </div>
-
-            <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
         </div>
     )
 }

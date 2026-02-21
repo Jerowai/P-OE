@@ -98,35 +98,35 @@ export default function DashboardPage() {
     const offset = circumference - (mockData.modelConfidence / 100) * circumference
 
     return (
-        <div style={{ maxWidth: '1200px' }}>
+        <div className="max-w-7xl mx-auto space-y-8">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}
+                className="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
             >
                 <div>
-                    <h1 style={{ fontSize: '28px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '4px' }}>Dashboard</h1>
-                    <p style={{ color: 'var(--muted)', fontSize: '15px' }}>
-                        Your hiring engine is active · <span style={{ color: 'var(--accent-green)' }}>{mockData.applicationCount}</span> applications tracked
+                    <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-1">Dashboard</h1>
+                    <p className="text-[var(--muted)] text-sm sm:text-base">
+                        Your hiring engine is active · <span className="text-[var(--accent-green)] font-bold">{mockData.applicationCount}</span> applications tracked
                     </p>
                 </div>
-                <Link href="/jobs" className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>
-                    <Briefcase size={15} /> Find Jobs <ArrowRight size={14} />
+                <Link href="/jobs" className="btn-primary !py-3 !px-6 text-sm w-full sm:w-auto">
+                    <Briefcase size={16} /> Find Jobs <ArrowRight size={14} />
                 </Link>
             </motion.div>
 
             {/* Top row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '20px', marginBottom: '20px' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Model Confidence */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    style={{ position: 'relative', borderRadius: '16px' }}
+                    className="lg:col-span-4 h-full"
                 >
-                    <GlowCard style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '100%' }}>
-                        <div style={{ position: 'relative', width: 140, height: 140, marginBottom: '16px' }}>
-                            <svg width="140" height="140" viewBox="0 0 140 140">
+                    <GlowCard className="p-8 flex flex-col items-center text-center h-full">
+                        <div className="relative w-32 h-32 sm:w-36 sm:h-36 mb-6">
+                            <svg className="w-full h-full" viewBox="0 0 140 140">
                                 <circle cx="70" cy="70" r="54" fill="none" stroke="var(--card-border)" strokeWidth="8" />
                                 <motion.circle
                                     cx="70" cy="70" r="54" fill="none"
@@ -145,31 +145,30 @@ export default function DashboardPage() {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div className="absolute inset-0 flex items-center justify-center">
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.5 }}
-                                    style={{ fontSize: '34px', fontWeight: 900, lineHeight: 1 }}
-                                    className="gradient-text"
+                                    className="text-3xl font-black gradient-text leading-none"
                                 >
                                     {mockData.modelConfidence}%
                                 </motion.div>
                             </div>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '16px', marginBottom: '6px' }}>Model Confidence</div>
-                        <div style={{ color: 'var(--muted)', fontSize: '13px', lineHeight: 1.5, marginBottom: '16px' }}>
+                        <h3 className="font-bold text-lg mb-2">Model Confidence</h3>
+                        <p className="text-[var(--muted)] text-sm mb-6 leading-relaxed">
                             Apply to more jobs to increase accuracy
-                        </div>
-                        <div style={{ background: 'rgba(0,255,136,0.06)', border: '1px solid rgba(0,255,136,0.12)', borderRadius: '8px', padding: '8px 14px', fontSize: '12px', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <TrendingUp size={12} />
-                            {mockData.applicationCount} applications tracked
+                        </p>
+                        <div className="bg-[var(--accent-green)]/10 border border-[var(--accent-green)]/20 rounded-full px-4 py-1.5 text-xs font-bold text-[var(--accent-green)] inline-flex items-center gap-2">
+                            <TrendingUp size={14} />
+                            {mockData.applicationCount} apps tracked
                         </div>
                     </GlowCard>
                 </motion.div>
 
                 {/* Score cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <ScoreCard label="Resume Score" score={mockData.resumeScore} color="var(--accent-green)" icon={<FileText size={20} />} href="/resume" />
                     <ScoreCard label="LinkedIn" score={mockData.linkedinScore} color="var(--accent-blue)" icon={<Linkedin size={20} />} href="/model" />
                     <ScoreCard label="GitHub" score={mockData.githubScore} color="var(--accent-purple)" icon={<Github size={20} />} href="/model" />
@@ -181,19 +180,13 @@ export default function DashboardPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', marginBottom: '20px' }}
+                    className="p-5 bg-[var(--warning)]/10 border border-[var(--warning)]/20 rounded-2xl flex gap-4 items-start"
                 >
-                    <div style={{
-                        background: 'rgba(255,184,0,0.05)', border: '1px solid rgba(255,184,0,0.15)',
-                        borderRadius: '14px', padding: '16px 20px',
-                        display: 'flex', gap: '12px', alignItems: 'flex-start',
-                    }}>
-                        <AlertCircle size={20} color="var(--warning)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                        <div>
-                            <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--warning)' }}>Your model needs more data</div>
-                            <div style={{ color: 'var(--muted)', fontSize: '13px', marginTop: '4px' }}>
-                                Apply to at least 10 jobs to unlock meaningful insights. Each application trains your hiring model.
-                            </div>
+                    <AlertCircle size={20} className="text-[var(--warning)] shrink-0 mt-1" />
+                    <div>
+                        <div className="font-bold text-sm text-[var(--warning)]">Your model needs more data</div>
+                        <div className="text-[var(--muted)] text-sm mt-1 leading-relaxed">
+                            Apply to at least 10 jobs to unlock meaningful insights. Each application trains your hiring model.
                         </div>
                     </div>
                 </motion.div>
@@ -204,47 +197,43 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', marginBottom: '28px' }}
+                className="relative rounded-2xl overflow-hidden group"
             >
                 <BorderBeam duration={15} colorFrom="#00FF88" colorTo="#8B5CF6" />
-                <div style={{
-                    background: 'linear-gradient(135deg, rgba(0,255,136,0.05), rgba(139,92,246,0.03))',
-                    border: '1px solid rgba(0,255,136,0.12)',
-                    borderRadius: '14px', padding: '14px 20px',
-                    display: 'flex', gap: '12px', alignItems: 'center',
-                    justifyContent: 'space-between',
-                }}>
-                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <Zap size={18} color="var(--accent-green)" />
-                        <span style={{ fontSize: '14px', color: 'var(--foreground)' }}>
-                            <strong>Pro tip:</strong> Connect your LinkedIn and GitHub to unlock your full hiring model potential.
-                        </span>
+                <div className="bg-white/[0.03] border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex gap-4 items-center">
+                        <div className="w-10 h-10 rounded-xl bg-[var(--accent-green)]/10 flex items-center justify-center shrink-0">
+                            <Zap size={20} className="text-[var(--accent-green)]" />
+                        </div>
+                        <p className="text-sm leading-relaxed">
+                            <span className="font-bold">Pro tip:</span> Connect your professional accounts to unlock the full potential of your AI model.
+                        </p>
                     </div>
-                    <Link href="/model" style={{ color: 'var(--accent-green)', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        Go to Model <ArrowRight size={13} />
+                    <Link href="/model" className="text-[var(--accent-green)] text-sm font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">
+                        Upgrade Model <ArrowRight size={14} />
                     </Link>
                 </div>
             </motion.div>
 
             {/* Smart Job Queue */}
-            <div style={{ marginBottom: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h2 style={{ fontSize: '20px', fontWeight: 800, letterSpacing: '-0.3px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <Briefcase size={20} /> Smart Job Queue
+            <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <h2 className="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-3">
+                        <Briefcase size={22} className="text-[var(--accent-green)]" /> Smart Job Queue
                     </h2>
-                    <Link href="/jobs" style={{ color: 'var(--accent-green)', fontSize: '14px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Link href="/jobs" className="text-[var(--accent-green)] text-sm font-bold flex items-center gap-2">
                         View all <ArrowRight size={14} />
                     </Link>
                 </div>
 
                 {/* High match */}
                 {highJobs.length > 0 && (
-                    <div style={{ marginBottom: '20px' }}>
-                        <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--accent-green)', marginBottom: '12px', letterSpacing: '1px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-2 text-[var(--accent-green)] font-black text-xs uppercase tracking-widest">
                             <span className="pulse-dot" />
                             High Probability ({highJobs.length})
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                             {highJobs.map((job) => <JobCard key={job.id} job={job} />)}
                         </div>
                     </div>
@@ -252,11 +241,11 @@ export default function DashboardPage() {
 
                 {/* Medium match */}
                 {medJobs.length > 0 && (
-                    <div style={{ marginBottom: '20px' }}>
-                        <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--warning)', marginBottom: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div className="space-y-4 pt-4">
+                        <div className="text-[var(--warning)] font-black text-xs uppercase tracking-widest flex items-center gap-2">
                             🟡 Medium Probability ({medJobs.length})
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                             {medJobs.map((job) => <JobCard key={job.id} job={job} />)}
                         </div>
                     </div>
@@ -264,11 +253,11 @@ export default function DashboardPage() {
 
                 {/* Low match */}
                 {lowJobs.length > 0 && (
-                    <div>
-                        <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--danger)', marginBottom: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div className="space-y-4 pt-4">
+                        <div className="text-[var(--danger)] font-black text-xs uppercase tracking-widest flex items-center gap-2">
                             🔴 Low Probability ({lowJobs.length})
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                             {lowJobs.map((job) => <JobCard key={job.id} job={job} />)}
                         </div>
                     </div>

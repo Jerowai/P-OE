@@ -33,47 +33,42 @@ export default function JobsPage() {
     const low = filtered.filter(j => j.match < 40)
 
     return (
-        <div style={{ maxWidth: '1200px' }}>
-            <div style={{ marginBottom: '32px' }}>
-                <h1 style={{ fontSize: '28px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '4px' }}>Job Queue</h1>
-                <p style={{ color: 'var(--muted)', fontSize: '15px' }}>{allJobs.length} positions matched to your profile</p>
+        <div className="max-w-7xl mx-auto space-y-8">
+            <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-1">Job Queue</h1>
+                <p className="text-[var(--muted)] text-sm sm:text-base">{allJobs.length} positions matched to your profile</p>
             </div>
 
             {/* Filters */}
-            <div className="glass-card" style={{ padding: '20px', marginBottom: '24px', display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                <div style={{ position: 'relative', flex: '1 1 200px' }}>
-                    <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
+            <div className="glass-card p-4 sm:p-6 flex flex-col lg:flex-row gap-4">
+                <div className="relative flex-1">
+                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                     <input
                         placeholder="Search jobs or companies..."
                         value={filters.search}
                         onChange={(e) => setFilters(f => ({ ...f, search: e.target.value }))}
-                        style={{
-                            width: '100%', padding: '9px 12px 9px 36px',
-                            background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                            borderRadius: '8px', color: 'var(--foreground)', fontSize: '14px', outline: 'none',
-                        }}
+                        className="w-full pl-10 pr-4 py-2.5 bg-white/[0.04] border border-[var(--card-border)] rounded-xl text-sm outline-none focus:border-[var(--accent-green)]/50 transition-colors"
                     />
                 </div>
 
-                {[
-                    { key: 'remote', label: 'Remote Type', options: [{ value: 'all', label: 'All' }, { value: 'fully_remote', label: 'Fully Remote' }, { value: 'hybrid', label: 'Hybrid' }, { value: 'onsite', label: 'Onsite' }] },
-                    { key: 'seniority', label: 'Seniority', options: [{ value: 'all', label: 'All' }, { value: 'junior', label: 'Junior' }, { value: 'mid', label: 'Mid' }, { value: 'senior', label: 'Senior' }, { value: 'staff', label: 'Staff' }] },
-                ].map((f) => (
-                    <select
-                        key={f.key}
-                        value={filters[f.key as keyof Filter]}
-                        onChange={(e) => setFilters(prev => ({ ...prev, [f.key]: e.target.value }))}
-                        style={{
-                            padding: '9px 12px', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                            borderRadius: '8px', color: 'var(--foreground)', fontSize: '14px', outline: 'none', cursor: 'pointer',
-                        }}
-                    >
-                        {f.options.map(o => <option key={o.value} value={o.value} style={{ background: '#111117' }}>{o.label}</option>)}
-                    </select>
-                ))}
+                <div className="flex flex-wrap gap-4">
+                    {[
+                        { key: 'remote', label: 'Remote Type', options: [{ value: 'all', label: 'All Remote' }, { value: 'fully_remote', label: 'Fully Remote' }, { value: 'hybrid', label: 'Hybrid' }, { value: 'onsite', label: 'Onsite' }] },
+                        { key: 'seniority', label: 'Seniority', options: [{ value: 'all', label: 'All Levels' }, { value: 'junior', label: 'Junior' }, { value: 'mid', label: 'Mid' }, { value: 'senior', label: 'Senior' }, { value: 'staff', label: 'Staff' }] },
+                    ].map((f) => (
+                        <select
+                            key={f.key}
+                            value={filters[f.key as keyof Filter]}
+                            onChange={(e) => setFilters(prev => ({ ...prev, [f.key]: e.target.value }))}
+                            className="flex-1 sm:flex-initial px-4 py-2.5 bg-white/[0.04] border border-[var(--card-border)] rounded-xl text-sm outline-none cursor-pointer focus:border-[var(--accent-green)]/50 transition-colors"
+                        >
+                            {f.options.map(o => <option key={o.value} value={o.value} className="bg-[#08080E]">{o.label}</option>)}
+                        </select>
+                    ))}
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', fontSize: '14px' }}>
-                    <Filter size={14} /> {filtered.length} results
+                    <div className="flex items-center gap-2 px-4 py-2 text-[var(--muted)] text-sm font-bold bg-white/[0.02] rounded-xl border border-white/5">
+                        <Filter size={14} /> {filtered.length} found
+                    </div>
                 </div>
             </div>
 
@@ -83,11 +78,11 @@ export default function JobsPage() {
                 { label: '🟡 Medium Probability', jobs: medium, color: 'var(--warning)' },
                 { label: '🔴 Low Probability', jobs: low, color: 'var(--danger)' },
             ].map((section) => section.jobs.length > 0 && (
-                <div key={section.label} style={{ marginBottom: '32px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: section.color, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <div key={section.label} className="space-y-6">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-3" style={{ color: section.color }}>
                         {section.label} ({section.jobs.length})
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                         {section.jobs.map((job, i) => (
                             <motion.div
                                 key={job.id}
@@ -95,37 +90,39 @@ export default function JobsPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.05 }}
                                 whileHover={{ y: -3 }}
-                                className="glass-card"
-                                style={{ padding: '24px' }}
+                                className="glass-card p-6 h-full flex flex-col justify-between"
                             >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                                    <div>
-                                        <div style={{ fontWeight: 700, fontSize: '16px' }}>{job.title}</div>
-                                        <div style={{ color: 'var(--muted)', fontSize: '13px', marginTop: '2px' }}>{job.company} · {job.location}</div>
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-start gap-4">
+                                        <div>
+                                            <h3 className="font-bold text-lg leading-tight">{job.title}</h3>
+                                            <div className="text-[var(--muted)] text-sm mt-1">{job.company} · {job.location}</div>
+                                        </div>
+                                        <div className="text-right shrink-0">
+                                            <div className="text-3xl font-black leading-none" style={{ color: section.color }}>{job.match}%</div>
+                                            <div className="text-[10px] font-black text-[var(--muted)] uppercase tracking-wider mt-1">match</div>
+                                        </div>
                                     </div>
-                                    <div style={{ textAlign: 'right' }}>
-                                        <div style={{ fontSize: '28px', fontWeight: 900, color: section.color, letterSpacing: '-1px', lineHeight: 1 }}>{job.match}%</div>
-                                        <div style={{ color: 'var(--muted)', fontSize: '11px' }}>match</div>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {job.keywords.map((k) => (
+                                            <span key={k} className="px-2.5 py-1 bg-white/[0.04] border border-white/5 rounded-md text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">
+                                                {k}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
 
-                                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
-                                    {job.keywords.map((k) => (
-                                        <span key={k} style={{
-                                            background: 'rgba(255,255,255,0.05)', border: '1px solid var(--card-border)',
-                                            borderRadius: '6px', padding: '3px 8px', fontSize: '12px', color: 'var(--muted)',
-                                        }}>{k}</span>
-                                    ))}
-                                </div>
-
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <div style={{
-                                        display: 'inline-flex', padding: '4px 10px', borderRadius: '999px',
-                                        background: 'rgba(255,255,255,0.04)', fontSize: '12px', color: 'var(--muted)',
-                                    }}>{job.remote}</div>
-                                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                        <span style={{ fontSize: '12px', color: 'var(--muted)' }}>Interview: <strong style={{ color: section.color }}>{job.probability}%</strong></span>
-                                        <button className="btn-primary" style={{ padding: '6px 14px', fontSize: '12px' }}>Apply</button>
+                                <div className="flex items-center justify-between pt-6 mt-6 border-t border-white/5">
+                                    <div className="px-3 py-1 bg-white/[0.03] rounded-full text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">
+                                        {job.remote}
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="text-right">
+                                            <div className="text-[10px] font-black text-[var(--muted)] uppercase tracking-widest leading-none mb-1">Status</div>
+                                            <div className="text-xs font-black" style={{ color: section.color }}>{job.probability}% odds</div>
+                                        </div>
+                                        <button className="btn-primary !px-4 !py-2 !text-xs">Apply</button>
                                     </div>
                                 </div>
                             </motion.div>

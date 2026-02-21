@@ -83,63 +83,44 @@ export default function LandingPage() {
   return (
     <div style={{ background: 'var(--background)', color: 'var(--foreground)', minHeight: '100vh' }}>
       {/* NAV */}
-      <header style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
-        backdropFilter: 'blur(20px)',
-        background: 'rgba(8,8,14,0.85)',
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: '10px',
-              background: 'linear-gradient(135deg, var(--accent-green), var(--accent-blue))',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Zap size={20} color="#000" />
+      <header className="fixed top-0 left-0 right-0 z-[100] border-b border-white/5 backdrop-blur-xl bg-[rgba(8,8,14,0.85)]">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent-green)] to-[var(--accent-blue)] flex items-center justify-center">
+              <Zap size={18} color="#000" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: '20px', letterSpacing: '-0.5px' }}>PIOE</span>
+            <span className="font-extrabold text-xl tracking-tight hidden sm:inline-block">PIOE</span>
           </Link>
 
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+          <nav className="hidden md:flex items-center gap-8">
             {['Features', 'Pricing', 'About'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} style={{ color: 'var(--muted)', fontSize: '14px', fontWeight: 500, transition: 'color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--foreground)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
-              >{item}</a>
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-[var(--muted)] text-sm font-medium hover:text-[var(--foreground)] transition-colors">
+                {item}
+              </a>
             ))}
           </nav>
 
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <Link href="/login" className="btn-secondary" style={{ padding: '8px 20px', fontSize: '14px' }}>Sign In</Link>
-            <Link href="/signup" className="btn-primary" style={{ padding: '8px 20px', fontSize: '14px' }}>Start Free Trial</Link>
+          <div className="flex items-center gap-3">
+            <Link href="/login" className="btn-secondary !py-2 !px-4 !text-xs sm:!text-sm">Sign In</Link>
+            <Link href="/signup" className="btn-primary !py-2 !px-4 !text-xs sm:!text-sm">Start Trial</Link>
           </div>
         </div>
       </header>
 
       {/* HERO */}
-      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '64px' }}>
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20 pb-12 lg:pt-32 lg:pb-32 px-6">
         <AnimatedBg />
 
-        {/* Radial glow */}
-        <div style={{
-          position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-          width: '900px', height: '600px', borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(0,255,136,0.06) 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }} />
-
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', width: '100%', position: 'relative', zIndex: 1 }}>
-          <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', paddingTop: '60px', paddingBottom: '80px' }}>
-
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}
+              className="flex justify-center mb-8"
             >
-              <span className="badge">
+              <span className="badge text-[10px] sm:text-xs">
                 <span className="pulse-dot" />
                 7-Day Free Trial — No Credit Card Required
               </span>
@@ -150,14 +131,14 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ fontSize: 'clamp(44px, 7vw, 84px)', fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.05, marginBottom: '24px' }}
+              className="text-[36px] sm:text-[54px] lg:text-[84px] font-black tracking-tighter leading-[1.1] mb-6"
             >
               Land Your{' '}
               <ShimmerText speed={3}>
                 Dream Job
               </ShimmerText>
-              <br />
-              <span style={{ color: 'var(--muted)', fontWeight: 300, fontSize: '0.85em', letterSpacing: '-1px' }}>with AI precision.</span>
+              <br className="hidden sm:block" />
+              <span className="text-[var(--muted)] font-light opacity-80"> with AI precision.</span>
             </motion.h1>
 
             {/* Sub */}
@@ -165,7 +146,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ fontSize: '20px', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '48px', maxWidth: '560px', margin: '0 auto 48px' }}
+              className="text-base sm:text-lg lg:text-xl text-[var(--muted)] leading-relaxed mb-10 max-w-xl mx-auto px-4"
             >
               PIOE builds a personal hiring model that learns from your profile and predicts which jobs you&apos;ll actually get an interview for.
             </motion.p>
@@ -175,12 +156,12 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '64px' }}
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-16 px-6"
             >
-              <Link href="/signup" className="btn-primary" style={{ padding: '16px 36px', fontSize: '17px' }}>
-                Start Free Trial <ArrowRight size={18} />
+              <Link href="/signup" className="btn-primary !py-4 !px-8 text-lg w-full sm:w-auto">
+                Start Free Trial <ArrowRight size={18} className="ml-2" />
               </Link>
-              <Link href="/login" className="btn-secondary" style={{ padding: '16px 36px', fontSize: '17px' }}>
+              <Link href="/login" className="btn-secondary !py-4 !px-8 text-lg w-full sm:w-auto">
                 Sign In
               </Link>
             </motion.div>
@@ -190,34 +171,32 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 40, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="float"
-              style={{ position: 'relative', display: 'inline-block', maxWidth: '700px', width: '100%' }}
+              className="float relative inline-block w-full max-w-3xl"
             >
-              <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden' }}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <BorderBeam duration={10} colorFrom="#00FF88" colorTo="#00BFFF" />
-                <div className="glass-card" style={{ padding: '28px', background: 'rgba(14,14,24,0.95)' }}>
-                  {/* Mini dashboard preview */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '16px' }}>
+                <div className="glass-card p-4 sm:p-8 bg-[rgba(14,14,24,0.95)]">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                     {[
                       { label: 'Resume Score', value: '72', color: 'var(--accent-green)' },
                       { label: 'LinkedIn', value: '61', color: 'var(--accent-blue)' },
                       { label: 'GitHub', value: '58', color: 'var(--accent-purple)' },
                     ].map(s => (
-                      <div key={s.label} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '32px', fontWeight: 900, color: s.color, letterSpacing: '-1px' }}>{s.value}</div>
-                        <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '4px' }}>{s.label}</div>
+                      <div key={s.label} className="bg-white/[0.04] rounded-xl p-4 text-center">
+                        <div className="text-3xl font-black tracking-tight" style={{ color: s.color }}>{s.value}</div>
+                        <div className="text-[10px] sm:text-xs text-[var(--muted)] mt-1 uppercase tracking-wider font-bold">{s.label}</div>
                       </div>
                     ))}
                   </div>
-                  <div style={{ display: 'flex', gap: '10px' }}>
+                  <div className="space-y-3">
                     {[
                       { company: 'Stripe', match: 87, dot: '🟢' },
                       { company: 'Vercel', match: 76, dot: '🟢' },
                       { company: 'Linear', match: 64, dot: '🟡' },
                     ].map(j => (
-                      <div key={j.company} style={{ flex: 1, background: 'rgba(255,255,255,0.03)', borderRadius: '8px', padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '13px', fontWeight: 600 }}>{j.dot} {j.company}</span>
-                        <span style={{ fontSize: '13px', color: j.match >= 70 ? 'var(--accent-green)' : 'var(--warning)', fontWeight: 700 }}>{j.match}%</span>
+                      <div key={j.company} className="flex items-center justify-between p-3 bg-white/[0.03] rounded-lg border border-white/5">
+                        <span className="text-sm font-semibold">{j.dot} {j.company}</span>
+                        <span className="text-sm font-bold" style={{ color: j.match >= 70 ? 'var(--accent-green)' : 'var(--warning)' }}>{j.match}% match</span>
                       </div>
                     ))}
                   </div>
@@ -229,9 +208,9 @@ export default function LandingPage() {
       </section>
 
       {/* STATS */}
-      <section style={{ padding: '80px 24px', borderTop: '1px solid var(--card-border)', borderBottom: '1px solid var(--card-border)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px', textAlign: 'center' }}>
+      <section className="py-16 md:py-24 px-6 border-y border-[var(--card-border)] bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center">
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -239,16 +218,17 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
+                className="text-center"
               >
-                <div style={{ fontSize: '52px', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1 }}>
+                <div className="text-3xl md:text-5xl lg:text-6xl font-black leading-none mb-2">
                   <NumberTicker
                     value={s.value}
                     suffix={s.suffix}
                     duration={s.speed}
-                    className="gradient-text"
+                    className="gradient-text tracking-tighter"
                   />
                 </div>
-                <div style={{ color: 'var(--muted)', fontSize: '15px', marginTop: '8px', fontWeight: 500 }}>{s.label}</div>
+                <div className="text-[var(--muted)] text-xs md:text-sm font-bold uppercase tracking-widest">{s.label}</div>
               </motion.div>
             ))}
           </div>
@@ -256,25 +236,25 @@ export default function LandingPage() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" style={{ padding: '120px 24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '72px' }}>
+      <section id="features" className="py-20 md:py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 md:mb-20">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="badge" style={{ marginBottom: '20px' }}>Features</span>
-              <h2 style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-2px', marginBottom: '16px' }}>
+              <span className="badge mb-4">Features</span>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6">
                 Your <GradientText>unfair advantage</GradientText><br />in the job market
               </h2>
-              <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '500px', margin: '0 auto' }}>
+              <p className="text-[var(--muted)] text-base md:text-lg max-w-lg mx-auto">
                 Every tool you need to go from applicant to offer — powered by AI.
               </p>
             </motion.div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((f, i) => (
               <motion.div
                 key={f.title}
@@ -285,13 +265,13 @@ export default function LandingPage() {
               >
                 <GlowCard
                   glowColor={f.color.replace('var(--accent-green)', '0,255,136').replace('var(--accent-blue)', '0,191,255').replace('var(--accent-purple)', '139,92,246').replace('var(--warning)', '255,184,0')}
-                  style={{ padding: '36px' }}
+                  className="p-8 h-full"
                 >
-                  <div style={{ width: 48, height: 48, borderRadius: '12px', background: `${f.color}14`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', border: `1px solid ${f.color}22` }}>
-                    <f.icon size={24} color={f.color} />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 border border-white/10" style={{ background: `${f.color}14` }}>
+                    <f.icon size={24} style={{ color: f.color }} />
                   </div>
-                  <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '10px' }}>{f.title}</h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.6 }}>{f.desc}</p>
+                  <h3 className="text-lg md:text-xl font-bold mb-3">{f.title}</h3>
+                  <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed">{f.desc}</p>
                 </GlowCard>
               </motion.div>
             ))}
@@ -300,17 +280,17 @@ export default function LandingPage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" style={{ padding: '120px 24px', background: 'rgba(255,255,255,0.01)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <span className="badge" style={{ marginBottom: '20px' }}>Simple Pricing</span>
-            <h2 style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-2px', marginBottom: '16px' }}>
+      <section id="pricing" className="py-20 md:py-32 px-6 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="badge mb-4">Pricing</span>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
               Start free. <GradientText>Upgrade anytime.</GradientText>
             </h2>
-            <p style={{ color: 'var(--muted)', fontSize: '18px' }}>All plans include a 7-day free trial.</p>
+            <p className="text-[var(--muted)] text-base md:text-lg">All plans include a 7-day free trial.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', alignItems: 'start' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {plans.map((plan, i) => (
               <motion.div
                 key={plan.name}
@@ -318,36 +298,33 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                style={{ position: 'relative', borderRadius: '20px' }}
+                className="relative group"
               >
                 {plan.highlighted && <BorderBeam duration={12} />}
-                <div className="glass-card" style={{
-                  padding: '36px',
-                  border: plan.highlighted ? '1px solid rgba(0,255,136,0.3)' : '1px solid var(--card-border)',
-                }}>
+                <div className={`glass-card p-8 sm:p-10 h-full flex flex-col ${plan.highlighted ? 'border-[var(--accent-green)]/30' : ''}`}>
                   {plan.highlighted && (
-                    <div style={{ position: 'absolute', top: '-1px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--accent-green), var(--accent-blue))', color: '#000', fontSize: '12px', fontWeight: 700, padding: '4px 16px', borderRadius: '0 0 10px 10px' }}>
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[var(--accent-green)] to-[var(--accent-blue)] text-black text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-wider">
                       MOST POPULAR
                     </div>
                   )}
-                  <div style={{ marginBottom: '24px' }}>
-                    <div style={{ fontWeight: 700, fontSize: '16px', marginBottom: '4px', color: plan.highlighted ? 'var(--accent-green)' : 'var(--foreground)' }}>{plan.name}</div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '2px' }}>
-                      <span style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-2px' }}>{plan.price}</span>
-                      <span style={{ color: 'var(--muted)', fontSize: '15px' }}>{plan.period}</span>
+                  <div className="mb-8">
+                    <div className={`font-bold text-sm mb-2 ${plan.highlighted ? 'text-[var(--accent-green)]' : 'text-[var(--muted)]'}`}>{plan.name}</div>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl sm:text-5xl font-black tracking-tight">{plan.price}</span>
+                      <span className="text-[var(--muted)] text-sm">{plan.period}</span>
                     </div>
-                    <div style={{ color: 'var(--muted)', fontSize: '14px', marginTop: '4px' }}>{plan.desc}</div>
+                    <p className="text-[var(--muted)] text-sm mt-2">{plan.desc}</p>
                   </div>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
+                  <ul className="space-y-4 mb-10 flex-1">
                     {plan.features.map(f => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                        <CheckCircle size={16} color="var(--accent-green)" />
-                        {f}
+                      <li key={f} className="flex items-center gap-3 text-sm">
+                        <CheckCircle size={16} className="text-[var(--accent-green)] flex-shrink-0" />
+                        <span>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <Link href="/signup" className={plan.highlighted ? 'btn-primary' : 'btn-secondary'} style={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
-                    {plan.cta} <ArrowRight size={16} />
+                  <Link href="/signup" className={`w-full justify-center ${plan.highlighted ? 'btn-primary' : 'btn-secondary'}`}>
+                    {plan.cta} <ArrowRight size={16} className="ml-2" />
                   </Link>
                 </div>
               </motion.div>
@@ -357,16 +334,16 @@ export default function LandingPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: '120px 24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <span className="badge" style={{ marginBottom: '20px' }}>Testimonials</span>
-            <h2 style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-2px' }}>
+      <section className="py-20 md:py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="badge mb-4">Testimonials</span>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight">
               Trusted by <GradientText>job seekers</GradientText>
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <motion.div
                 key={t.name}
@@ -374,19 +351,27 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
+                className="h-full"
               >
-                <GlowCard style={{ padding: '28px', height: '100%' }}>
-                  <div style={{ display: 'flex', gap: '2px', marginBottom: '16px' }}>
-                    {Array.from({ length: t.rating }, (_, i) => (
-                      <Star key={i} size={16} color="var(--warning)" fill="var(--warning)" />
-                    ))}
-                  </div>
-                  <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--foreground)', marginBottom: '20px' }}>
-                    &ldquo;{t.text}&rdquo;
-                  </p>
+                <GlowCard className="p-8 h-full flex flex-col justify-between">
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '14px' }}>{t.name}</div>
-                    <div style={{ color: 'var(--muted)', fontSize: '13px' }}>{t.role}</div>
+                    <div className="flex gap-1 mb-6">
+                      {Array.from({ length: t.rating }, (_, i) => (
+                        <Star key={i} size={14} className="text-[var(--warning)] fill-[var(--warning)]" />
+                      ))}
+                    </div>
+                    <p className="text-sm md:text-base italic leading-relaxed text-[var(--foreground)] mb-8">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-6 border-t border-white/5">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-[var(--accent-green)]">
+                      {t.name[0]}
+                    </div>
+                    <div>
+                      <div className="font-bold text-sm">{t.name}</div>
+                      <div className="text-[var(--muted)] text-[10px] uppercase font-bold tracking-widest">{t.role}</div>
+                    </div>
                   </div>
                 </GlowCard>
               </motion.div>
@@ -396,30 +381,24 @@ export default function LandingPage() {
       </section>
 
       {/* CTA BANNER */}
-      <section style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden' }}
+            className="relative rounded-3xl overflow-hidden shadow-2xl"
           >
             <BorderBeam duration={8} colorFrom="#00FF88" colorTo="#8B5CF6" />
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(0,255,136,0.07), rgba(0,191,255,0.04))',
-              border: '1px solid rgba(0,255,136,0.2)',
-              borderRadius: '24px',
-              padding: '64px',
-              textAlign: 'center',
-            }}>
-              <h2 style={{ fontSize: '40px', fontWeight: 900, letterSpacing: '-2px', marginBottom: '16px' }}>
-                Ready to land your <GradientText>dream job?</GradientText>
+            <div className="bg-gradient-to-br from-[rgba(0,255,136,0.1)] to-[rgba(139,92,246,0.05)] border border-white/10 p-8 md:p-20 text-center">
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 leading-tight">
+                Ready to land your <br className="sm:hidden" /> <GradientText>dream job?</GradientText>
               </h2>
-              <p style={{ color: 'var(--muted)', fontSize: '17px', marginBottom: '36px' }}>
+              <p className="text-[var(--muted)] text-base md:text-lg mb-10 max-w-lg mx-auto leading-relaxed">
                 Join 10,000+ engineers who use PIOE to navigate the job market with confidence.
               </p>
-              <Link href="/signup" className="btn-primary" style={{ padding: '16px 40px', fontSize: '17px' }}>
-                Start Free Trial <ArrowRight size={18} />
+              <Link href="/signup" className="btn-primary !px-10 !py-5 text-xl w-full sm:w-auto">
+                Start Free Trial <ArrowRight size={20} className="ml-2" />
               </Link>
             </div>
           </motion.div>
@@ -427,17 +406,18 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: '1px solid var(--card-border)', padding: '40px 24px', textAlign: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '16px' }}>
-          <div style={{ width: 28, height: 28, borderRadius: '8px', background: 'linear-gradient(135deg, var(--accent-green), var(--accent-blue))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Zap size={16} color="#000" />
+      <footer className="py-12 border-t border-[var(--card-border)] px-6 text-center">
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent-green)] to-[var(--accent-blue)] flex items-center justify-center">
+            <Zap size={18} color="#000" />
           </div>
-          <span style={{ fontWeight: 800, fontSize: '16px' }}>PIOE</span>
+          <span className="font-black text-lg tracking-tight">PIOE</span>
         </div>
-        <p style={{ color: 'var(--muted)', fontSize: '14px' }}>
+        <p className="text-[var(--muted)] text-sm font-medium">
           © 2026 PIOE · AI-powered hiring intelligence
         </p>
       </footer>
+
     </div>
   )
 }
