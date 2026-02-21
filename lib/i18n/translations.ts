@@ -1,0 +1,255 @@
+export type Language = 'en' | 'tr' | 'es'
+
+export const translations = {
+    en: {
+        nav: {
+            features: 'Features',
+            pricing: 'Pricing',
+            about: 'About',
+            signIn: 'Sign In',
+            startTrial: 'Start Trial',
+        },
+        hero: {
+            badge: '7-Day Free Trial — No Credit Card Required',
+            headline1: 'Land Your',
+            headline2: 'Dream Job',
+            headline3: 'with AI precision.',
+            sub: 'PIOE builds a personal hiring model that learns from your profile and predicts which jobs you\'ll actually get an interview for.',
+            cta: 'Start Free Trial',
+            ctaSecondary: 'Sign In',
+        },
+        stats: [
+            { label: 'Active Users' },
+            { label: 'Avg. Match Rate' },
+            { label: 'Jobs Matched' },
+            { label: 'Faster Hiring' },
+        ],
+        features: {
+            badge: 'Features',
+            title1: 'Your',
+            titleHighlight: 'unfair advantage',
+            title2: 'in the job market',
+            sub: 'Every tool you need to go from applicant to offer — powered by AI.',
+            items: [
+                { title: 'AI Hiring Model', desc: 'Learns from every job application and adapts its predictions to find you the highest-probability opportunities.' },
+                { title: 'Resume Studio', desc: 'AI-powered resume optimization with real-time scoring on skill density, impact statements, and keyword coverage.' },
+                { title: 'Smart Job Queue', desc: 'Curated job listings ranked by your hiring probability. Stop guessing, start applying with confidence.' },
+                { title: 'LinkedIn + GitHub Score', desc: 'Analyse your professional digital presence and compare against market benchmarks for your target role.' },
+            ],
+        },
+        pricing: {
+            badge: 'Pricing',
+            title1: 'Start free.',
+            titleHighlight: 'Upgrade anytime.',
+            sub: 'All plans include a 7-day free trial.',
+            plans: [
+                {
+                    name: 'Monthly',
+                    desc: 'Perfect for active job seekers',
+                    features: ['AI Hiring Model', 'Resume Studio', 'Smart Job Queue', 'LinkedIn Analysis', '7-Day Free Trial'],
+                    cta: 'Start Free Trial',
+                },
+                {
+                    name: 'Career',
+                    desc: 'For serious career growth',
+                    features: ['Everything in Monthly', 'GitHub Analysis', 'Priority Support', 'Custom Job Alerts', '7-Day Free Trial'],
+                    cta: 'Start Free Trial',
+                },
+                {
+                    name: 'Job Hunt',
+                    desc: 'Single intensive 30-day sprint',
+                    features: ['30-day full access', 'All features included', 'No subscription', 'Priority Support'],
+                    cta: 'Buy Now',
+                },
+            ],
+            mostPopular: 'MOST POPULAR',
+        },
+        testimonials: {
+            badge: 'Testimonials',
+            title1: 'Trusted by',
+            titleHighlight: 'job seekers',
+            items: [
+                { name: 'Sarah K.', role: 'Frontend Engineer', text: 'Got 3 interviews in my first week. The job matching is eerily accurate.' },
+                { name: 'Marc D.', role: 'Staff Engineer', text: 'The resume optimizer took my score from 58 to 84. Huge difference.' },
+                { name: 'Aisha T.', role: 'Product Manager', text: 'Finally a tool that tells me WHY I\'m not getting interviews. Changed everything.' },
+            ],
+        },
+        cta: {
+            title1: 'Ready to land your',
+            titleHighlight: 'dream job?',
+            sub: 'Join 10,000+ engineers who use PIOE to navigate the job market with confidence.',
+            button: 'Start Free Trial',
+        },
+        footer: {
+            copy: '© 2026 PIOE · AI-powered hiring intelligence',
+        },
+    },
+
+    tr: {
+        nav: {
+            features: 'Özellikler',
+            pricing: 'Fiyatlar',
+            about: 'Hakkında',
+            signIn: 'Giriş Yap',
+            startTrial: 'Deneyi Başlat',
+        },
+        hero: {
+            badge: '7 Günlük Ücretsiz Deneme — Kredi Kartı Gerekmez',
+            headline1: 'Hayalindeki',
+            headline2: 'İşe Yerleş',
+            headline3: 'yapay zeka hassasiyetiyle.',
+            sub: 'PIOE, profilinden öğrenen kişisel bir işe alım modeli oluşturur ve hangi işlerde mülakat alabileceğini tahmin eder.',
+            cta: 'Ücretsiz Deneyi Başlat',
+            ctaSecondary: 'Giriş Yap',
+        },
+        stats: [
+            { label: 'Aktif Kullanıcı' },
+            { label: 'Ort. Eşleşme Oranı' },
+            { label: 'Eşleşen İş İlanı' },
+            { label: 'Daha Hızlı İşe Alım' },
+        ],
+        features: {
+            badge: 'Özellikler',
+            title1: 'İş piyasasındaki',
+            titleHighlight: 'haksız avantajın',
+            title2: '',
+            sub: 'Başvurudan teklife giden süreçte ihtiyacınız olan her araç — yapay zeka destekli.',
+            items: [
+                { title: 'Yapay Zeka İşe Alım Modeli', desc: 'Her iş başvurusundan öğrenir ve sana en yüksek mülakata girme olasılığı olan fırsatları bulur.' },
+                { title: 'Özgeçmiş Studio', desc: 'Beceri yoğunluğu, etki cümleleri ve anahtar kelime kapsamı üzerinde gerçek zamanlı puanlamayla yapay zeka destekli CV optimizasyonu.' },
+                { title: 'Akıllı İş Kuyruğu', desc: 'İşe alım olasılığına göre sıralanmış iş ilanları. Tahmin etmeyi bırak, güvenle başvur.' },
+                { title: 'LinkedIn + GitHub Skoru', desc: 'Profesyonel dijital varlığını analiz et ve hedef rolündeki piyasa kriterleriyle kıyasla.' },
+            ],
+        },
+        pricing: {
+            badge: 'Fiyatlandırma',
+            title1: 'Ücretsiz başla.',
+            titleHighlight: 'İstediğin zaman yükselt.',
+            sub: 'Tüm planlar 7 günlük ücretsiz deneme içerir.',
+            plans: [
+                {
+                    name: 'Aylık',
+                    desc: 'Aktif iş arayanlar için ideal',
+                    features: ['Yapay Zeka İşe Alım Modeli', 'Özgeçmiş Studio', 'Akıllı İş Kuyruğu', 'LinkedIn Analizi', '7 Günlük Ücretsiz Deneme'],
+                    cta: 'Ücretsiz Deneyi Başlat',
+                },
+                {
+                    name: 'Kariyer',
+                    desc: 'Ciddi kariyer gelişimi için',
+                    features: ['Aylık\'taki her şey', 'GitHub Analizi', 'Öncelikli Destek', 'Özel İş Uyarıları', '7 Günlük Ücretsiz Deneme'],
+                    cta: 'Ücretsiz Deneyi Başlat',
+                },
+                {
+                    name: 'İş Avı',
+                    desc: 'Yoğun 30 günlük sprint',
+                    features: ['30 gün tam erişim', 'Tüm özellikler dahil', 'Abonelik yok', 'Öncelikli Destek'],
+                    cta: 'Şimdi Satın Al',
+                },
+            ],
+            mostPopular: 'EN POPÜLER',
+        },
+        testimonials: {
+            badge: 'Yorumlar',
+            title1: 'İş arayanların',
+            titleHighlight: 'güvendiği platform',
+            items: [
+                { name: 'Sarah K.', role: 'Frontend Mühendisi', text: 'İlk haftamda 3 mülakat aldım. İş eşleştirme inanılmaz derecede doğru.' },
+                { name: 'Marc D.', role: 'Kıdemli Mühendis', text: 'Özgeçmiş optimizörü puanımı 58\'den 84\'e çıkardı. Büyük fark.' },
+                { name: 'Aisha T.', role: 'Ürün Müdürü', text: 'Sonunda neden mülakat alamadığımı söyleyen bir araç. Her şeyi değiştirdi.' },
+            ],
+        },
+        cta: {
+            title1: 'Hayalindeki işe',
+            titleHighlight: 'yerleşmeye hazır mısın?',
+            sub: 'PIOE ile iş piyasasında güvenle yol alan 10.000+ mühendise katıl.',
+            button: 'Ücretsiz Deneyi Başlat',
+        },
+        footer: {
+            copy: '© 2026 PIOE · Yapay zeka destekli işe alım zekası',
+        },
+    },
+
+    es: {
+        nav: {
+            features: 'Características',
+            pricing: 'Precios',
+            about: 'Acerca de',
+            signIn: 'Iniciar Sesión',
+            startTrial: 'Prueba Gratis',
+        },
+        hero: {
+            badge: 'Prueba gratis 7 días — Sin tarjeta de crédito',
+            headline1: 'Consigue el',
+            headline2: 'Trabajo Ideal',
+            headline3: 'con precisión de IA.',
+            sub: 'PIOE construye un modelo de contratación personal que aprende de tu perfil y predice en qué empleos obtendrás una entrevista.',
+            cta: 'Comenzar Prueba Gratis',
+            ctaSecondary: 'Iniciar Sesión',
+        },
+        stats: [
+            { label: 'Usuarios Activos' },
+            { label: 'Tasa de Coincidencia' },
+            { label: 'Empleos Coincidentes' },
+            { label: 'Contratación Más Rápida' },
+        ],
+        features: {
+            badge: 'Características',
+            title1: 'Tu',
+            titleHighlight: 'ventaja injusta',
+            title2: 'en el mercado laboral',
+            sub: 'Todas las herramientas que necesitas para pasar de candidato a oferta — impulsadas por IA.',
+            items: [
+                { title: 'Modelo de Contratación con IA', desc: 'Aprende de cada solicitud de empleo y adapta sus predicciones para encontrar las oportunidades de mayor probabilidad.' },
+                { title: 'Estudio de Currículum', desc: 'Optimización de currículum con IA con puntuación en tiempo real sobre densidad de habilidades, declaraciones de impacto y cobertura de palabras clave.' },
+                { title: 'Cola de Empleos Inteligente', desc: 'Listados de empleos seleccionados ordenados por tu probabilidad de contratación. Deja de adivinar, empieza a postularte con confianza.' },
+                { title: 'Puntuación LinkedIn + GitHub', desc: 'Analiza tu presencia digital profesional y compárala con los estándares del mercado para tu rol objetivo.' },
+            ],
+        },
+        pricing: {
+            badge: 'Precios',
+            title1: 'Comienza gratis.',
+            titleHighlight: 'Actualiza cuando quieras.',
+            sub: 'Todos los planes incluyen 7 días de prueba gratuita.',
+            plans: [
+                {
+                    name: 'Mensual',
+                    desc: 'Perfecto para buscadores de empleo activos',
+                    features: ['Modelo de Contratación con IA', 'Estudio de Currículum', 'Cola de Empleos Inteligente', 'Análisis de LinkedIn', 'Prueba Gratis 7 Días'],
+                    cta: 'Comenzar Prueba Gratis',
+                },
+                {
+                    name: 'Carrera',
+                    desc: 'Para el crecimiento profesional serio',
+                    features: ['Todo en Mensual', 'Análisis de GitHub', 'Soporte Prioritario', 'Alertas de Empleo Personalizadas', 'Prueba Gratis 7 Días'],
+                    cta: 'Comenzar Prueba Gratis',
+                },
+                {
+                    name: 'Caza de Empleo',
+                    desc: 'Sprint intensivo de 30 días',
+                    features: ['Acceso completo 30 días', 'Todas las funciones incluidas', 'Sin suscripción', 'Soporte Prioritario'],
+                    cta: 'Comprar Ahora',
+                },
+            ],
+            mostPopular: 'MÁS POPULAR',
+        },
+        testimonials: {
+            badge: 'Testimonios',
+            title1: 'La confianza de',
+            titleHighlight: 'buscadores de empleo',
+            items: [
+                { name: 'Sarah K.', role: 'Ingeniera Frontend', text: 'Conseguí 3 entrevistas en mi primera semana. La coincidencia de empleos es increíblemente precisa.' },
+                { name: 'Marc D.', role: 'Ingeniero Senior', text: 'El optimizador de currículum subió mi puntuación de 58 a 84. Gran diferencia.' },
+                { name: 'Aisha T.', role: 'Gerente de Producto', text: 'Por fin una herramienta que me dice POR QUÉ no obtengo entrevistas. Cambió todo.' },
+            ],
+        },
+        cta: {
+            title1: '¿Listo para conseguir',
+            titleHighlight: 'tu trabajo soñado?',
+            sub: 'Únete a más de 10,000 ingenieros que usan PIOE para navegar el mercado laboral con confianza.',
+            button: 'Comenzar Prueba Gratis',
+        },
+        footer: {
+            copy: '© 2026 PIOE · Inteligencia de contratación con IA',
+        },
+    },
+} as const

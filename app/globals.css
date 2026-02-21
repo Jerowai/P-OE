@@ -1,11 +1,29 @@
 @import "tailwindcss";
 
 :root {
+  --background: #FFFFFF;
+  --background-rgb: 255, 255, 255;
+  --card-bg: #F9FAFB;
+  --card-bg-rgb: 249, 250, 251;
+  --card-border: #E5E7EB;
+  --foreground: #111827;
+  --muted: #6B7280;
+  --accent-green: #00D4AA;
+  --accent-blue: #00BFFF;
+  --accent-purple: #8B5CF6;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --sidebar-bg: #F3F4F6;
+}
+
+.dark {
   --background: #08080E;
+  --background-rgb: 8, 8, 14;
   --card-bg: #0E0E18;
+  --card-bg-rgb: 14, 14, 24;
   --card-border: #1A1A2E;
   --foreground: #E8E8F0;
-  --muted: #6B7280;
+  --muted: #9CA3AF;
   --accent-green: #00FF88;
   --accent-blue: #00BFFF;
   --accent-purple: #8B5CF6;
@@ -263,4 +281,58 @@ a {
 
 .nav-item.active svg {
   color: var(--accent-green);
+}
+
+/* ── Animation utilities (used by new hero components) ── */
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: animate-in;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.slide-in-from-bottom-10 {
+  --tw-enter-translate-y: 10px;
+}
+
+.slide-in-from-top-4 {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fill-mode-backwards {
+  animation-fill-mode: backwards;
+}
+
+/* Glass card - aligned with both themes */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
 }
