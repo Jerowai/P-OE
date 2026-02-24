@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
 import { ThemeProvider } from 'next-themes'
+import { LanguageProvider } from '@/lib/i18n/context'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
     const [queryClient] = useState(
@@ -17,10 +18,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     )
 
     return (
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <QueryClientProvider client={queryClient}>
-                {children}
-            </QueryClientProvider>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <LanguageProvider>
+                    {children}
+                </LanguageProvider>
+            </ThemeProvider>
+        </QueryClientProvider>
     )
 }

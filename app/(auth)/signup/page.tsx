@@ -6,8 +6,67 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Zap, Mail, Lock, User, ArrowRight, Loader2, Check } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { useLanguage } from '@/lib/i18n/context'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
+
+const inputStyle: React.CSSProperties = {
+    width: '100%',
+    paddingLeft: '40px',
+    paddingRight: '16px',
+    paddingTop: '11px',
+    paddingBottom: '11px',
+    background: 'var(--surface-raised)',
+    border: '1px solid var(--border)',
+    borderRadius: '10px',
+    color: 'var(--foreground)',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.15s',
+}
+
+function Input({
+    icon: Icon,
+    type,
+    value,
+    onChange,
+    placeholder,
+    minLength,
+    required,
+}: {
+    icon: React.ElementType
+    type: string
+    value: string
+    onChange: (v: string) => void
+    placeholder: string
+    minLength?: number
+    required?: boolean
+}) {
+    const [focused, setFocused] = useState(false)
+    return (
+        <div className="relative">
+            <Icon size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+            <input
+                type={type}
+                value={value}
+                onChange={e => onChange(e.target.value)}
+                placeholder={placeholder}
+                required={required}
+                minLength={minLength}
+                style={{
+                    ...inputStyle,
+                    borderColor: focused ? 'var(--accent-brand)' : 'var(--border)',
+                    boxShadow: focused ? '0 0 0 3px rgb(79 70 229 / 0.08)' : 'none',
+                }}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+            />
+        </div>
+    )
+}
 
 export default function SignupPage() {
+    const { t } = useLanguage()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -36,7 +95,6 @@ export default function SignupPage() {
         }
 
         if (data.user) {
-            // Create user profile in users table
             await supabase.from('users').insert({
                 id: data.user.id,
                 email,
@@ -51,142 +109,80 @@ export default function SignupPage() {
     }
 
     return (
-        <div style={{
-            minHeight: '100vh', background: 'var(--background)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '24px', position: 'relative',
-        }}>
-            <div style={{
-                position: 'fixed', top: '30%', left: '50%', transform: 'translateX(-50%)',
-                width: '600px', height: '600px', borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(0,191,255,0.04) 0%, transparent 70%)',
-                pointerEvents: 'none',
-            }} />
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative">
+            {/* Top controls */}
+            <div className="absolute top-6 right-6 flex items-center gap-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+            </div>
+
+            {/* Subtle background glow */}
+            <div
+                aria-hidden
+                className="pointer-events-none fixed inset-0 flex items-center justify-center overflow-hidden"
+            >
+                <div className="w-[500px] h-[500px] rounded-full blur-[120px] opacity-[0.05]"
+                    style={{ background: 'var(--accent-brand)' }} />
+            </div>
 
             <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{ width: '100%', maxWidth: '440px' }}
+                transition={{ duration: 0.45 }}
+                className="w-full max-w-[420px] relative z-10"
             >
-                <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '40px', justifyContent: 'center' }}>
-                    <div style={{
-                        width: 36, height: 36, borderRadius: '10px',
-                        background: 'linear-gradient(135deg, var(--accent-green), var(--accent-blue))',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                        <Zap size={20} color="#000" />
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-2.5 mb-8 justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
+                        <Zap size={16} className="text-background" />
                     </div>
-                    <span style={{ fontWeight: 800, fontSize: '22px', letterSpacing: '-0.5px' }}>PIOE</span>
+                    <span className="font-bold text-xl tracking-tight">PIOE</span>
                 </Link>
 
                 {/* Trial banner */}
-                <div style={{
-                    background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.2)',
-                    borderRadius: '12px', padding: '16px 20px', marginBottom: '20px',
-                    display: 'flex', gap: '12px', alignItems: 'flex-start',
-                }}>
-                    <div style={{
-                        width: 24, height: 24, borderRadius: '50%',
-                        background: 'var(--accent-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        flexShrink: 0, marginTop: '2px',
-                    }}>
-                        <Check size={14} color="#000" />
+                <div className="rounded-2xl p-4 mb-5 flex gap-3 items-start"
+                    style={{ background: 'rgb(79 70 229 / 0.07)', border: '1px solid rgb(79 70 229 / 0.18)' }}>
+                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                        style={{ background: 'var(--accent-brand)' }}>
+                        <Check size={13} className="text-white" />
                     </div>
                     <div>
-                        <div style={{ fontWeight: 700, fontSize: '15px', color: 'var(--accent-green)' }}>
-                            7-Day Free Trial
+                        <div className="font-semibold text-sm" style={{ color: 'var(--accent-brand)' }}>
+                            {t.auth.trialBadge}
                         </div>
-                        <div style={{ color: 'var(--muted)', fontSize: '13px', marginTop: '4px' }}>
-                            Full access. No charge until day 8. Cancel anytime.
-                        </div>
+                        <div className="text-muted text-xs mt-1 leading-relaxed">{t.auth.trialSub}</div>
                     </div>
                 </div>
 
-                <div className="glass-card" style={{ padding: '40px' }}>
-                    <h1 style={{ fontSize: '26px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '8px' }}>
-                        Build your hiring engine
-                    </h1>
-                    <p style={{ color: 'var(--muted)', fontSize: '15px', marginBottom: '32px' }}>
-                        Create your account to get started
-                    </p>
+                <div className="glass-card p-8">
+                    <h1 className="text-2xl font-bold tracking-tight mb-1">{t.auth.buildEngine}</h1>
+                    <p className="text-muted text-sm mb-7">{t.auth.createAccountSub}</p>
 
-                    <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        <div>
-                            <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', marginBottom: '8px', display: 'block' }}>
-                                Full Name
+                    <form onSubmit={handleSignup} className="space-y-4">
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold uppercase tracking-wider text-muted block">
+                                {t.auth.fullNameLabel}
                             </label>
-                            <div style={{ position: 'relative' }}>
-                                <User size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    required
-                                    placeholder="John Smith"
-                                    style={{
-                                        width: '100%', padding: '12px 14px 12px 40px',
-                                        background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                                        borderRadius: '10px', color: 'var(--foreground)', fontSize: '15px', outline: 'none',
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = 'rgba(0,255,136,0.4)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
-                                />
-                            </div>
+                            <Input icon={User} type="text" value={name} onChange={setName} placeholder="John Smith" required />
                         </div>
 
-                        <div>
-                            <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', marginBottom: '8px', display: 'block' }}>
-                                Email
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold uppercase tracking-wider text-muted block">
+                                {t.auth.emailLabel}
                             </label>
-                            <div style={{ position: 'relative' }}>
-                                <Mail size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    placeholder="you@company.com"
-                                    style={{
-                                        width: '100%', padding: '12px 14px 12px 40px',
-                                        background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                                        borderRadius: '10px', color: 'var(--foreground)', fontSize: '15px', outline: 'none',
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = 'rgba(0,255,136,0.4)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
-                                />
-                            </div>
+                            <Input icon={Mail} type="email" value={email} onChange={setEmail} placeholder="you@example.com" required />
                         </div>
 
-                        <div>
-                            <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', marginBottom: '8px', display: 'block' }}>
-                                Password
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold uppercase tracking-wider text-muted block">
+                                {t.auth.passwordLabel}
                             </label>
-                            <div style={{ position: 'relative' }}>
-                                <Lock size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                    placeholder="Min. 8 characters"
-                                    minLength={8}
-                                    style={{
-                                        width: '100%', padding: '12px 14px 12px 40px',
-                                        background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                                        borderRadius: '10px', color: 'var(--foreground)', fontSize: '15px', outline: 'none',
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = 'rgba(0,255,136,0.4)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
-                                />
-                            </div>
+                            <Input icon={Lock} type="password" value={password} onChange={setPassword} placeholder="••••••••" minLength={8} required />
                         </div>
 
                         {error && (
-                            <div style={{
-                                background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.2)',
-                                borderRadius: '8px', padding: '12px', fontSize: '14px', color: 'var(--danger)',
-                            }}>
+                            <div className="p-3 rounded-lg text-sm text-center"
+                                style={{ background: 'rgb(220 38 38 / 0.08)', border: '1px solid rgb(220 38 38 / 0.2)', color: 'var(--danger)' }}>
                                 {error}
                             </div>
                         )}
@@ -194,27 +190,25 @@ export default function SignupPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn-primary"
-                            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', fontSize: '15px', opacity: loading ? 0.7 : 1 }}
+                            className="btn-primary w-full justify-center mt-2"
+                            style={{ paddingTop: '13px', paddingBottom: '13px' }}
                         >
-                            {loading ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Creating account...</> : <>Start Free Trial <ArrowRight size={16} /></>}
+                            {loading ? (
+                                <><Loader2 size={17} className="animate-spin" /> {t.auth.creatingAccountBtn}</>
+                            ) : (
+                                <>{t.auth.startTrial} <ArrowRight size={16} /></>
+                            )}
                         </button>
-
-                        <p style={{ fontSize: '12px', color: 'var(--muted)', textAlign: 'center' }}>
-                            By signing up, you agree to our Terms of Service and Privacy Policy.
-                        </p>
                     </form>
 
-                    <p style={{ textAlign: 'center', color: 'var(--muted)', fontSize: '14px', marginTop: '24px' }}>
-                        Already have an account?{' '}
-                        <Link href="/login" style={{ color: 'var(--accent-green)', fontWeight: 600 }}>
-                            Sign in
+                    <p className="text-center text-muted text-sm mt-7 pt-6 border-t border-border">
+                        {t.auth.alreadyHaveAccount}{' '}
+                        <Link href="/login" className="text-accent font-semibold hover:underline">
+                            {t.auth.signInBtn}
                         </Link>
                     </p>
                 </div>
             </motion.div>
-
-            <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
         </div>
     )
 }

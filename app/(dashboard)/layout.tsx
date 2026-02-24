@@ -22,28 +22,35 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
 function MobileNav() {
     return (
-        <nav className="fixed bottom-0 left-0 right-0 h-16 bg-[var(--sidebar-bg)] border-t border-[var(--card-border)] backdrop-blur-lg z-50 flex items-center justify-around px-4">
-            <Link href="/dashboard" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--accent-green)] transition-colors">
+        <nav className="fixed bottom-0 left-0 right-0 h-16 border-t backdrop-blur-lg z-50 flex items-center justify-around px-4"
+            style={{ background: 'var(--sidebar-bg)', borderColor: 'var(--border)' }}>
+            <Link href="/dashboard" className="flex flex-col items-center gap-1 transition-colors"
+                style={{ color: 'var(--foreground-muted)' }}>
                 <LayoutDashboard size={20} />
                 <span className="text-[10px] font-medium">Home</span>
             </Link>
-            <Link href="/resume" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--accent-green)] transition-colors">
+            <Link href="/resume" className="flex flex-col items-center gap-1 transition-colors"
+                style={{ color: 'var(--foreground-muted)' }}>
                 <FileText size={20} />
                 <span className="text-[10px] font-medium">Resume</span>
             </Link>
-            <Link href="/jobs" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--accent-green)] transition-colors">
+            <Link href="/jobs" className="flex flex-col items-center gap-1 transition-colors"
+                style={{ color: 'var(--foreground-muted)' }}>
                 <Briefcase size={20} />
                 <span className="text-[10px] font-medium">Jobs</span>
             </Link>
-            <Link href="/model" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--accent-green)] transition-colors">
+            <Link href="/model" className="flex flex-col items-center gap-1 transition-colors"
+                style={{ color: 'var(--foreground-muted)' }}>
                 <Brain size={20} />
                 <span className="text-[10px] font-medium">Model</span>
             </Link>
-            <Link href="/settings" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--accent-green)] transition-colors">
+            <Link href="/settings" className="flex flex-col items-center gap-1 transition-colors"
+                style={{ color: 'var(--foreground-muted)' }}>
                 <Settings size={20} />
                 <span className="text-[10px] font-medium">Settings</span>
             </Link>
         </nav>
     )
 }
+
 

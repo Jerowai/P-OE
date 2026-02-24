@@ -83,6 +83,23 @@ export const translations = {
         footer: {
             copy: '© 2026 PIOE · AI-powered hiring intelligence',
         },
+        auth: {
+            welcomeBack: 'Welcome back',
+            signInSub: 'Sign in to your hiring engine',
+            emailLabel: 'Email',
+            passwordLabel: 'Password',
+            signInBtn: 'Sign In',
+            signingInBtn: 'Signing in...',
+            noAccount: "Don't have an account?",
+            startTrial: 'Start free trial',
+            buildEngine: 'Build your hiring engine',
+            createAccountSub: 'Create your account to get started',
+            fullNameLabel: 'Full Name',
+            creatingAccountBtn: 'Creating account...',
+            alreadyHaveAccount: 'Already have an account?',
+            trialBadge: '7-Day Free Trial',
+            trialSub: 'Full access. No charge until day 8. Cancel anytime.',
+        },
     },
 
     tr: {
@@ -167,6 +184,23 @@ export const translations = {
         footer: {
             copy: '© 2026 PIOE · Yapay zeka destekli işe alım zekası',
         },
+        auth: {
+            welcomeBack: 'Tekrar hoş geldiniz',
+            signInSub: 'İşe alım motorunuza giriş yapın',
+            emailLabel: 'E-posta',
+            passwordLabel: 'Şifre',
+            signInBtn: 'Giriş Yap',
+            signingInBtn: 'Giriş yapılıyor...',
+            noAccount: 'Hesabınız yok mu?',
+            startTrial: 'Ücretsiz denemeyi başlat',
+            buildEngine: 'İşe alım motorunuzu kurun',
+            createAccountSub: 'Başlamak için hesabınızı oluşturun',
+            fullNameLabel: 'Ad Soyad',
+            creatingAccountBtn: 'Hesap oluşturuluyor...',
+            alreadyHaveAccount: 'Zaten hesabınız var mı?',
+            trialBadge: '7 Günlük Ücretsiz Deneme',
+            trialSub: 'Tam erişim. 8. güne kadar ücret yok. İstediğiniz zaman iptal edin.',
+        },
     },
 
     es: {
@@ -250,6 +284,23 @@ export const translations = {
         },
         footer: {
             copy: '© 2026 PIOE · Inteligencia de contratación con IA',
+        },
+        auth: {
+            welcomeBack: 'Bienvenido de nuevo',
+            signInSub: 'Inicie sesión en su motor de contratación',
+            emailLabel: 'Correo electrónico',
+            passwordLabel: 'Contraseña',
+            signInBtn: 'Iniciar Sesión',
+            signingInBtn: 'Iniciando sesión...',
+            noAccount: '¿No tiene una cuenta?',
+            startTrial: 'Iniciar prueba gratuita',
+            buildEngine: 'Construye tu motor de contratación',
+            createAccountSub: 'Crea tu cuenta para empezar',
+            fullNameLabel: 'Nombre completo',
+            creatingAccountBtn: 'Creando cuenta...',
+            alreadyHaveAccount: '¿Ya tienes una cuenta?',
+            trialBadge: 'Prueba gratuita de 7 días',
+            trialSub: 'Acceso total. Sin cargos hasta el día 8. Cancela en cualquier momento.',
         },
     },
 } as const

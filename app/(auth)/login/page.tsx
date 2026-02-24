@@ -6,8 +6,12 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Zap, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { useLanguage } from '@/lib/i18n/context'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
 
 export default function LoginPage() {
+    const { t } = useLanguage()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -31,74 +35,79 @@ export default function LoginPage() {
     }
 
     return (
-        <div style={{
-            minHeight: '100vh', background: 'var(--background)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '24px', position: 'relative',
-        }}>
-            {/* Background glow */}
-            <div style={{
-                position: 'fixed', top: '30%', left: '50%', transform: 'translateX(-50%)',
-                width: '600px', height: '600px', borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(0,255,136,0.04) 0%, transparent 70%)',
-                pointerEvents: 'none',
-            }} />
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative">
+            {/* Top controls */}
+            <div className="absolute top-6 right-6 flex items-center gap-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+            </div>
+
+            {/* Subtle background glow */}
+            <div
+                aria-hidden
+                className="pointer-events-none fixed inset-0 flex items-center justify-center overflow-hidden"
+            >
+                <div className="w-[500px] h-[500px] rounded-full blur-[120px] opacity-[0.05]"
+                    style={{ background: 'var(--accent-brand)' }} />
+            </div>
 
             <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{ width: '100%', maxWidth: '420px' }}
+                transition={{ duration: 0.45 }}
+                className="w-full max-w-[400px] relative z-10"
             >
                 {/* Logo */}
-                <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '40px', justifyContent: 'center' }}>
-                    <div style={{
-                        width: 36, height: 36, borderRadius: '10px',
-                        background: 'linear-gradient(135deg, var(--accent-green), var(--accent-blue))',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                        <Zap size={20} color="#000" />
+                <Link href="/" className="flex items-center gap-2.5 mb-10 justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
+                        <Zap size={16} className="text-background" />
                     </div>
-                    <span style={{ fontWeight: 800, fontSize: '22px', letterSpacing: '-0.5px' }}>PIOE</span>
+                    <span className="font-bold text-xl tracking-tight">PIOE</span>
                 </Link>
 
-                <div className="glass-card" style={{ padding: '40px' }}>
-                    <h1 style={{ fontSize: '26px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '8px' }}>Welcome back</h1>
-                    <p style={{ color: 'var(--muted)', fontSize: '15px', marginBottom: '32px' }}>
-                        Sign in to your hiring engine
-                    </p>
+                <div className="glass-card p-8">
+                    <h1 className="text-2xl font-bold tracking-tight mb-1">{t.auth.welcomeBack}</h1>
+                    <p className="text-muted text-sm mb-8">{t.auth.signInSub}</p>
 
-                    <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        <div>
-                            <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', marginBottom: '8px', display: 'block' }}>
-                                Email
+                    <form onSubmit={handleLogin} className="space-y-4">
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold uppercase tracking-wider text-muted block">
+                                {t.auth.emailLabel}
                             </label>
-                            <div style={{ position: 'relative' }}>
-                                <Mail size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
+                            <div className="relative">
+                                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    placeholder="you@company.com"
+                                    placeholder="you@example.com"
                                     style={{
-                                        width: '100%', padding: '12px 14px 12px 40px',
-                                        background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                                        borderRadius: '10px', color: 'var(--foreground)', fontSize: '15px',
-                                        outline: 'none', transition: 'border-color 0.2s',
+                                        width: '100%',
+                                        paddingLeft: '40px',
+                                        paddingRight: '16px',
+                                        paddingTop: '11px',
+                                        paddingBottom: '11px',
+                                        background: 'var(--surface-raised)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '10px',
+                                        color: 'var(--foreground)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.15s',
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = 'rgba(0,255,136,0.4)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
+                                    onFocus={e => e.target.style.borderColor = 'var(--accent-brand)'}
+                                    onBlur={e => e.target.style.borderColor = 'var(--border)'}
                                 />
                             </div>
                         </div>
 
-                        <div>
-                            <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', marginBottom: '8px', display: 'block' }}>
-                                Password
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold uppercase tracking-wider text-muted block">
+                                {t.auth.passwordLabel}
                             </label>
-                            <div style={{ position: 'relative' }}>
-                                <Lock size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
+                            <div className="relative">
+                                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
                                 <input
                                     type="password"
                                     value={password}
@@ -106,22 +115,28 @@ export default function LoginPage() {
                                     required
                                     placeholder="••••••••"
                                     style={{
-                                        width: '100%', padding: '12px 14px 12px 40px',
-                                        background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)',
-                                        borderRadius: '10px', color: 'var(--foreground)', fontSize: '15px',
-                                        outline: 'none', transition: 'border-color 0.2s',
+                                        width: '100%',
+                                        paddingLeft: '40px',
+                                        paddingRight: '16px',
+                                        paddingTop: '11px',
+                                        paddingBottom: '11px',
+                                        background: 'var(--surface-raised)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '10px',
+                                        color: 'var(--foreground)',
+                                        fontSize: '14px',
+                                        outline: 'none',
+                                        transition: 'border-color 0.15s',
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = 'rgba(0,255,136,0.4)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
+                                    onFocus={e => e.target.style.borderColor = 'var(--accent-brand)'}
+                                    onBlur={e => e.target.style.borderColor = 'var(--border)'}
                                 />
                             </div>
                         </div>
 
                         {error && (
-                            <div style={{
-                                background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.2)',
-                                borderRadius: '8px', padding: '12px', fontSize: '14px', color: 'var(--danger)',
-                            }}>
+                            <div className="p-3 rounded-lg text-sm text-center"
+                                style={{ background: 'rgb(220 38 38 / 0.08)', border: '1px solid rgb(220 38 38 / 0.2)', color: 'var(--danger)' }}>
                                 {error}
                             </div>
                         )}
@@ -129,23 +144,25 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn-primary"
-                            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', fontSize: '15px', opacity: loading ? 0.7 : 1 }}
+                            className="btn-primary w-full justify-center mt-2"
+                            style={{ paddingTop: '13px', paddingBottom: '13px' }}
                         >
-                            {loading ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Signing in...</> : <>Sign In <ArrowRight size={16} /></>}
+                            {loading ? (
+                                <><Loader2 size={17} className="animate-spin" /> {t.auth.signingInBtn}</>
+                            ) : (
+                                <>{t.auth.signInBtn} <ArrowRight size={16} /></>
+                            )}
                         </button>
                     </form>
 
-                    <p style={{ textAlign: 'center', color: 'var(--muted)', fontSize: '14px', marginTop: '24px' }}>
-                        Don&apos;t have an account?{' '}
-                        <Link href="/signup" style={{ color: 'var(--accent-green)', fontWeight: 600 }}>
-                            Start free trial
+                    <p className="text-center text-muted text-sm mt-7 pt-6 border-t border-border">
+                        {t.auth.noAccount}{' '}
+                        <Link href="/signup" className="text-accent font-semibold hover:underline">
+                            {t.auth.startTrial}
                         </Link>
                     </p>
                 </div>
             </motion.div>
-
-            <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
         </div>
     )
 }
