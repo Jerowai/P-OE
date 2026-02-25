@@ -55,7 +55,7 @@ export function AnimatedHero() {
                     >
                         <h1 className="text-5xl md:text-7xl max-w-3xl tracking-tighter text-center font-bold leading-tight">
                             <span className="text-foreground">{t.hero.headline1} </span>
-                            <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1 h-[1.2em]">
+                            <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                                 &nbsp;
                                 {titles.map((title, index) => (
                                     <motion.span
